@@ -10,7 +10,7 @@
 
 <body>
     <section id="header">
-        <a href="#"><img src="img/logo.png" alt="logo"></a>
+        <a href="index.html"><img src="img/logo.png" alt="logo"></a>
 
         <div>
 
@@ -65,7 +65,10 @@
             <input type="number" value="1">
             <button class="normal">Add To Cart</button>
             <h4>Product Details</h4>
-            <span>Experience the perfect blend of style and comfort with our Classic Comfort Cotton Tee. Crafted from high-quality, breathable cotton fabric, this T-shirt is designed to keep you feeling cool and confident all day long. Whether you're heading to the gym, hanging out with friends, or just relaxing at home, this versatile tee is a wardrobe essential.</span>
+            <span>Experience the perfect blend of style and comfort with our Classic Comfort Cotton Tee. Crafted from
+                high-quality, breathable cotton fabric, this T-shirt is designed to keep you feeling cool and confident
+                all day long. Whether you're heading to the gym, hanging out with friends, or just relaxing at home,
+                this versatile tee is a wardrobe essential.</span>
         </div>
     </section>
 
@@ -205,16 +208,31 @@
     <script src="script.js"></script>
 
     <script>
+
         const mainImg = document.querySelector('#mainImage');
         const allImg = document.querySelectorAll('.small-image-col');
 
-        allImg.forEach(value=>{
-            value.addEventListener('click' , (event)=>{
+        allImg.forEach(value => {
+            value.addEventListener('click', (event) => {
                 const src = event.target.getAttribute('src');
-                mainImg.setAttribute('src' , src);
+                mainImg.setAttribute('src', src);
             })
         })
 
+        // add img
+        const imgDiv = document.querySelector('.single-pro-image');
+        const imgDetails = document.querySelector('#single-pro-details');
+        const smallImage = imgDiv.querySelectorAll('.small-image-col');
+        let data = JSON.parse(localStorage.getItem('data'))
+        if (data) {
+            let img = data[0].img;
+            let name = data[0].price;
+            let price = data[0].proName;
+            imgDiv.firstElementChild.src = img;
+            imgDetails.querySelector('h4').innerHTML = name;
+            imgDetails.querySelector('h2').innerHTML = price;
+            smallImage[0].firstElementChild.src = img
+        }
     </script>
 
 </body>
