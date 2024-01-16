@@ -299,6 +299,7 @@ button.white {
     position: absolute;
     bottom: 15px;
     right: 15px;
+    overflow: hidden;
 }
 
 #product1 .pro-container {

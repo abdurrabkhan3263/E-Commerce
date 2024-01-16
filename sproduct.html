@@ -77,10 +77,10 @@
         <p>Summer Collection New Morden Design</p>
         <div class="pro-container">
             <div class="pro">
-                <img src="img/Products/n1.jpg" alt="Img">
+                <img src="img/product/p1/p1.jpg" alt="Img">
                 <div class="des">
-                    <span>Adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <span>Mast & Harbour</span>
+                    <h5>Lymio Casual Shirt for Men</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -88,15 +88,15 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>$78</h4>
+                    <h4>₹399</h4>
                 </div>
                 <a href="#"><i class="fa-solid fa-cart-shopping" id="cart"></i></a>
             </div>
             <div class="pro">
-                <img src="img/Products/n2.jpg" alt="Img">
+                <img src="img/product/p2/p1.jpg" alt="Img">
                 <div class="des">
-                    <span>Adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <span>GRECIILOOKS</span>
+                    <h5>GRECIILOOKS Shirt for Men</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -104,15 +104,15 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>$78</h4>
+                    <h4>₹399</h4>
                 </div>
                 <a href="#"><i class="fa-solid fa-cart-shopping" id="cart"></i></a>
             </div>
             <div class="pro">
-                <img src="img/Products/n3.jpg" alt="Img">
+                <img src="img/product/p3/p1.jpg" alt="Img">
                 <div class="des">
-                    <span>Adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <span>GLORYBOYZ</span>
+                    <h5>GLORYBOYZ Mens Half Sleeve</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -120,15 +120,15 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>$78</h4>
+                    <h4>₹899</h4>
                 </div>
                 <a href="#"><i class="fa-solid fa-cart-shopping" id="cart"></i></a>
             </div>
             <div class="pro">
-                <img src="img/Products/n4.jpg" alt="Img">
+                <img src="img/product/p4/p1.jpg" alt="Img">
                 <div class="des">
-                    <span>Adidas</span>
-                    <h5>Cartoon Astronaut T-Shirts</h5>
+                    <span>Mentific®</span>
+                    <h5>Mentific® Digital Print Lycra Half Sleeve</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -136,7 +136,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>$78</h4>
+                    <h4>₹499</h4>
                 </div>
                 <a href="#"><i class="fa-solid fa-cart-shopping" id="cart"></i></a>
             </div>
@@ -223,15 +223,17 @@
         const imgDiv = document.querySelector('.single-pro-image');
         const imgDetails = document.querySelector('#single-pro-details');
         const smallImage = imgDiv.querySelectorAll('.small-image-col');
+        const mainImage = imgDiv.firstElementChild
+        console.log(mainImage)
         let data = JSON.parse(localStorage.getItem('data'))
         if (data) {
-            let img = data[0].img;
-            let name = data[0].price;
-            let price = data[0].proName;
-            imgDiv.firstElementChild.src = img;
-            imgDetails.querySelector('h4').innerHTML = name;
-            imgDetails.querySelector('h2').innerHTML = price;
-            smallImage[0].firstElementChild.src = img
+            imgDetails.querySelector('h4').innerHTML = data.proname;
+            imgDetails.querySelector('h2').innerHTML = data.price;
+            mainImage.src = data.img1
+            smallImage[0].firstElementChild.src = data.img1;
+            smallImage[1].firstElementChild.src = data.img2;
+            smallImage[2].firstElementChild.src = data.img3;
+            smallImage[3].firstElementChild.src = data.img4;
         }
     </script>
 
