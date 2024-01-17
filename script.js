@@ -208,9 +208,9 @@ product.forEach((value) => {
                 <td><a href="#"><i class="fa-regular fa-circle-xmark"></i></a></td>
                 <td><img src="${img.src}" alt="products"></td>
                 <td>${proname.innerHTML}</td>
-                <td>${price.innerHTML}</td>
+                <td class="pro-price">${price.innerHTML}</td>
                 <td><input type="number" value="1"></td>
-                <td>$118.19</td>`
+                <td>${price.innerHTML}</td>`
             ]
             if(localData === null){
                 localStorage.setItem('cart' , JSON.stringify(arry));
