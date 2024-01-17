@@ -175,10 +175,15 @@ function cartOpen(event) {
     event.target.parentNode.href = 'cart.html'
 }
 
+
 product.forEach((value) => {
     value.addEventListener('click', (event) => {
         if (event.target.tagName === 'IMG' || event.target.tagName === 'H5') {
-            let name = value.querySelector('.des')
+            let name = value.querySelector('.des');
+            let proname = name.querySelector('h5');
+            let price = name.querySelector('h4');
+            let img = value.firstElementChild;
+            console.log(img)
             let proName = name.firstElementChild.nextElementSibling.innerHTML;
             productOpen();
             let arr;
@@ -187,12 +192,34 @@ product.forEach((value) => {
                     arr = value;
                 }
             })
-            if(arr){
-                localStorage.setItem('data' , JSON.stringify(arr))
+            if (arr) {
+                localStorage.setItem('data', JSON.stringify(arr))
             }
         }
         if (event.target.tagName === 'I') {
+            let name = value.querySelector('.des');
+            let proname = name.querySelector('h5');
+            let price = name.querySelector('h4');
+            let img = value.firstElementChild;
             cartOpen(event);
+            let localData = JSON.parse(localStorage.getItem('cart'));
+            let arry = [
+                `
+                <td><a href="#"><i class="fa-regular fa-circle-xmark"></i></a></td>
+                <td><img src="${img.src}" alt="products"></td>
+                <td>${proname.innerHTML}</td>
+                <td>${price.innerHTML}</td>
+                <td><input type="number" value="1"></td>
+                <td>$118.19</td>`
+            ]
+            if(localData === null){
+                localStorage.setItem('cart' , JSON.stringify(arry));
+            }else{
+                localData.map((value , index)=>{
+                    arry.push(value);
+                })
+                localStorage.setItem('cart' , JSON.stringify(arry))
+            }
         }
     })
 })

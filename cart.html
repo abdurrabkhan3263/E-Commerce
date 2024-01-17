@@ -50,31 +50,8 @@
                 </tr>
             </thead>
 
-            <tbody>
-                <tr>
-                    <td><a href="#"><i class="fa-regular fa-circle-xmark"></i></a></td>
-                    <td><img src="img/Products/f1.jpg" alt="products"></td>
-                    <td>Cartoon Astronaut T-Shirts</td>
-                    <td>$118.19</td>
-                    <td><input type="number" value="1"></td>
-                    <td>$118.19</td>
-                </tr>
-                <tr>
-                    <td><a href="#"><i class="fa-regular fa-circle-xmark"></i></a></td>
-                    <td><img src="img/Products/f3.jpg" alt="products"></td>
-                    <td>Cartoon Astronaut T-Shirts</td>
-                    <td>$118.19</td>
-                    <td><input type="number" value="1"></td>
-                    <td>$118.19</td>
-                </tr>
-                <tr>
-                    <td><a href="#"><i class="fa-regular fa-circle-xmark"></i></a></td>
-                    <td><img src="img/Products/f2.jpg" alt="products"></td>
-                    <td>Cartoon Astronaut T-Shirts</td>
-                    <td>$118.19</td>
-                    <td><input type="number" value="1"></td>
-                    <td>$118.19</td>
-                </tr>
+            <tbody id="table-body">
+
             </tbody>
         </table>
     </section>
@@ -160,6 +137,41 @@
 
     <script src="https://kit.fontawesome.com/88fbbffc8c.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
+    <script>
+        let tableBody = document.querySelector('#table-body')
+        let cartData = JSON.parse(localStorage.getItem('cart'));
+        let data = '';
+        cartData.forEach((value)=>{
+            let row = document.createElement('tr');
+            row.innerHTML += value
+            row.querySelector('a').addEventListener('click' , (event)=>{
+                console.log(cartData)
+                event.target.closest('tr').remove();
+            })
+            tableBody.appendChild(row);
+        });
+    </script>
 </body>
 
 </html>
+
+
+
+
+<!-- 
+<tr>
+    <td><a href="#"><i class="fa-regular fa-circle-xmark"></i></a></td>
+    <td><img src="img/Products/f3.jpg" alt="products"></td>
+    <td>Cartoon Astronaut T-Shirts</td>
+    <td>$118.19</td>
+    <td><input type="number" value="1"></td>
+    <td>$118.19</td>
+</tr>
+<tr>
+    <td><a href="#"><i class="fa-regular fa-circle-xmark"></i></a></td>
+    <td><img src="img/Products/f2.jpg" alt="products"></td>
+    <td>Cartoon Astronaut T-Shirts</td>
+    <td>$118.19</td>
+    <td><input type="number" value="1"></td>
+    <td>$118.19</td>
+</tr> -->
