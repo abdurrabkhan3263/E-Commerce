@@ -20,13 +20,16 @@
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li id="lg-bag"><a href="cart.html" class="active"><i class="fa-solid fa-shopping-bag"></i></a></li>
+                <li id="lg-bag"><a class="active" href="cart.html" id="bag"><i
+                            class="cart-bag fa-solid fa-shopping-bag"></i></a>
+                    <h5 class="cart-num">0</h5>
+                </li>
                 <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
             </ul>
 
         </div>
         <div id="mobile">
-            <a href="cart.html"><i class="fa-solid fa-shopping-bag"></i></a>
+            <a href="cart.html" id="bag"><i class="cart-bag fa-solid fa-shopping-bag"></i></a>
             <i class="fa-solid fa-outdent" id="bar"></i>
         </div>
     </section>
@@ -70,7 +73,7 @@
             <table>
                 <tr>
                     <td>Cart Subtotal</td>
-                    <td class="subt">$ 335</td>
+                    <td class="subt">₹ 0</td>
                 </tr>
                 <tr>
                     <td>Shipping</td>
@@ -78,7 +81,7 @@
                 </tr>
                 <tr>
                     <td><strong>Total</strong></td>
-                    <td><strong class="subt">$ 335</strong></td>
+                    <td><strong class="subt">₹ 0</strong></td>
                 </tr>
             </table>
             <button class="normal">Proceed To Checkout</button>
@@ -138,36 +141,88 @@
     <script src="https://kit.fontawesome.com/88fbbffc8c.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
     <script>
-        function TotalPrice(){
+        function TotalPrice() {
             let total = 0;
-            let proPrice = document.querySelectorAll('.pro-price');
-            proPrice.forEach((value , index)=>{
+            let subTotal = document.querySelectorAll('.sub-total');
+            subTotal.forEach((value, index) => {
                 let price = parseInt(value.innerHTML.slice(1));
                 total = total + price;
             })
-            return total;
+            let subT = document.querySelectorAll('.subT');
+            subT.forEach(value => {
+                value.innerHTML = "₹" + total;
+            });
+
         }
+
+        function priceSub(subTotal, proPrice, value) {
+            let totalPrice = 0;
+            let subtotal = subTotal;
+            let proprice = proPrice;
+            let Value = value;
+            for (let i = 1; i <= value; i++) {
+                totalPrice = totalPrice + parseInt(proprice.innerHTML.slice(1));
+            }
+            subTotal.innerHTML = `₹${totalPrice}`;
+        }
+
+        function cartNumm() {
+            const cartNum = document.querySelector('.cart-num');
+            let data = JSON.parse(localStorage.getItem('cart'));
+            if (data === null) {
+                return
+            } else {
+                cartNum.innerHTML = data.length;
+            }
+        }
+
+        function storeHtml() {
+            let htmlArr = [];
+            const tableRow = document.querySelectorAll('.table-row')
+            tableRow.forEach(value => {
+                htmlArr.push(value.innerHTML)
+            });
+            localStorage.setItem('cart', JSON.stringify(htmlArr))
+            cartNumm();
+        }
+
         let tableBody = document.querySelector('#table-body')
         let cartData = JSON.parse(localStorage.getItem('cart'));
         let data = '';
-        if(cartData === null){
+        if (cartData === null) {
 
-        }else{
-            cartData.forEach((value)=>{
+        } else {
+            cartData.forEach((value) => {
                 let row = document.createElement('tr');
-                row.innerHTML += value
-                row.querySelector('a').addEventListener('click' , (event)=>{
-                    console.log(event.target.closest('tr'))
+                row.classList.add('table-row');
+                row.innerHTML += value;
+                if (row.querySelector('a') === null) {
+                    return;
+                }
+                row.querySelector('a').addEventListener('click', (event) => {
                     event.target.closest('tr').remove();
-                    localStorage.clear();
+                    storeHtml();
+                    TotalPrice();
                 })
                 tableBody.appendChild(row);
+
+                const inputNumber = document.querySelectorAll('.input-number');
+                inputNumber.forEach(value => {
+                    value.addEventListener('input', event => {
+                        if (event.target.value <= 0) {
+                            event.target.value = 1;
+                        } else {
+                            let subTotal = event.target.parentNode.nextElementSibling;
+                            let proPrice = event.target.parentNode.previousElementSibling;
+                            priceSub(subTotal, proPrice, event.target.value);
+                            TotalPrice();
+                            storeHtml();
+                        }
+                    })
+                })
             });
+            TotalPrice();
         }
-        let subT = document.querySelectorAll('.subT');
-        subT.forEach(value=>{
-            value.innerHTML = "₹" + TotalPrice();
-        })
     </script>
 </body>
 

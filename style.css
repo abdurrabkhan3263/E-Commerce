@@ -559,6 +559,15 @@ footer .copyright {
     width: 100%;
 }
 
+.cart-bag{
+    position: relative;
+}
+
+.cart-num {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+}
 
 
 

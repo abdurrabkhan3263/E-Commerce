@@ -149,7 +149,15 @@ const proObj = [
     },
 ]
 
-
+function cartNumm(){
+    const cartNum = document.querySelector('.cart-num');
+    let data = JSON.parse(localStorage.getItem('cart'));
+    if(data === null){
+        return
+    }else{
+        cartNum.innerHTML = data.length;
+    }
+}
 
 function openClose() {
     return navBar.style.right = (navBar.style.right) === ('0px') ? '-350px' : '0px';
@@ -171,9 +179,6 @@ function productOpen() {
     window.location.href = 'sproduct.html'
 }
 
-function cartOpen(event) {
-    event.target.parentNode.href = 'cart.html'
-}
 
 
 product.forEach((value) => {
@@ -197,11 +202,12 @@ product.forEach((value) => {
             }
         }
         if (event.target.tagName === 'I') {
+            const cartNum = document.querySelector('.cart-num');
+            let cart = document.querySelector('.cart-bag');
             let name = value.querySelector('.des');
             let proname = name.querySelector('h5');
             let price = name.querySelector('h4');
             let img = value.firstElementChild;
-            cartOpen(event);
             let localData = JSON.parse(localStorage.getItem('cart'));
             let arry = [
                 `
@@ -209,8 +215,8 @@ product.forEach((value) => {
                 <td><img src="${img.src}" alt="products"></td>
                 <td>${proname.innerHTML}</td>
                 <td class="pro-price">${price.innerHTML}</td>
-                <td><input type="number" value="1"></td>
-                <td>${price.innerHTML}</td>`
+                <td><input type="number" value="1" class="input-number"></td>
+                <td class="sub-total">${price.innerHTML}</td>`
             ]
             if(localData === null){
                 localStorage.setItem('cart' , JSON.stringify(arry));
@@ -218,9 +224,13 @@ product.forEach((value) => {
                 localData.map((value , index)=>{
                     arry.push(value);
                 })
-                localStorage.setItem('cart' , JSON.stringify(arry))
+                localStorage.setItem('cart' , JSON.stringify(arry));
+                cartNumm();
             }
         }
     })
 })
 
+window.addEventListener('DOMContentLoaded' , ()=>{
+    cartNumm();
+})
