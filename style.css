@@ -702,4 +702,14 @@ footer .copyright {
     footer .copyright {
         text-align: start;
     }
+    .m-cart-bag{
+        position: relative;
+        z-index: -5;
+    }
+    .m-cart-h4 {
+        position: absolute;
+        right: -7px;
+        top: 23px;
+        font-size: 15px;
+    }
 }

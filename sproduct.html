@@ -28,7 +28,9 @@
 
         </div>
         <div id="mobile">
-            <a href="cart.html" id="bag"><i class="cart-bag fa-solid fa-shopping-bag"></i></a>
+            <a href="cart.html" id="bag"><i class="cart-bag fa-solid fa-shopping-bag">
+                    <h5 class="m-cart-h4">0</h5>
+                </i></a>
             <i class="fa-solid fa-outdent" id="bar"></i>
         </div>
     </section>
@@ -240,11 +242,13 @@
 
         function cartNumm() {
             const cartNum = document.querySelector('.cart-num');
+            const mcartNum = document.querySelector('.m-cart-h4');
             let data = JSON.parse(localStorage.getItem('cart'));
             if (data === null) {
                 return
             } else {
                 cartNum.innerHTML = data.length;
+                mcartNum.innerHTML = data.length;
             }
         }
 

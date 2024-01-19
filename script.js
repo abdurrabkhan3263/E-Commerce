@@ -151,11 +151,13 @@ const proObj = [
 
 function cartNumm(){
     const cartNum = document.querySelector('.cart-num');
+    const mcartNum = document.querySelector('.m-cart-h4');
     let data = JSON.parse(localStorage.getItem('cart'));
     if(data === null){
         return
     }else{
         cartNum.innerHTML = data.length;
+        mcartNum.innerHTML = data.length;
     }
 }
 
